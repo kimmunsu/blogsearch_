@@ -1,8 +1,6 @@
 package com.kms.blogsearch.dto
 
-import com.kms.blogsearch.enums.SortType
 import jakarta.validation.constraints.NotNull
-import jakarta.validation.constraints.Null
 import org.hibernate.validator.constraints.Range
 
 data class BlogSearchRequest(

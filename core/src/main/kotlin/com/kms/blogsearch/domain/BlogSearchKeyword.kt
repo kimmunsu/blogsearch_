@@ -4,7 +4,6 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import org.apache.commons.lang3.StringUtils
 import java.time.LocalDateTime
 
 /**
@@ -15,7 +14,7 @@ class BlogSearchKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0L
-    var keyword: String = StringUtils.EMPTY
+    var keyword: String = ""
     var createdDtm: LocalDateTime = LocalDateTime.MIN
     var processedDtm : LocalDateTime? = null
 }

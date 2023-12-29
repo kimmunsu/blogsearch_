@@ -1,10 +1,5 @@
 package com.kms.blogsearch.exception
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.kms.blogsearch.infrastructure.external.exception.KakaoApiExceptionResponse
-import com.kms.blogsearch.logger
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException

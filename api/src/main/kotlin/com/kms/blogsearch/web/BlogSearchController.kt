@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/blog")
 class BlogSearchController(
-    val blogSearchFacade: BlogSearchFacade,
-    val popularKeywordUseCase: PopularKyewordUseCase
+    private val blogSearchFacade: BlogSearchFacade,
+    private val popularKeywordUseCase: PopularKyewordUseCase
 ) {
 
     @Operation(description = "search blog with pagination")

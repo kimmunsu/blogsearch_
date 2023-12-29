@@ -1,6 +1,6 @@
-package com.kms.blogsearch.domain.dto
+package com.kms.blogsearch.dto
 
-import com.kms.blogsearch.infrastructure.dto.Document
+import com.kms.blogsearch.domain.dto.Document
 
 data class BlogDto(
     val blogname: String,
