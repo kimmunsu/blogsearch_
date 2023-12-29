@@ -1,4 +1,4 @@
-package com.kms.blogsearch
+package com.kms.blogserach
 
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -13,5 +13,4 @@ fun main(args: Array<String>) {
 	runApplication<BlogsearchApplication>(*args)
 }
 
-// common logging
 inline fun <reified T> T.logger() = LoggerFactory.getLogger(T::class.java)!!

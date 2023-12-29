@@ -1,8 +1,7 @@
 package com.kms.blogsearch.aop
 
 import com.kms.blogsearch.event.BlogSearchByKeywordEvent
-import com.kms.blogsearch.logger
-import com.kms.blogsearch.web.BlogSearchRequest
+import com.kms.blogsearch.infrastructure.dto.BlogSearchRequestDto
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
 import org.springframework.context.ApplicationEventPublisher
@@ -18,9 +17,9 @@ class BlogSearchByKeywordAspect(
 ) {
 
     @Before("execution(* com.kms.blogsearch.application.BlogSearchFacade.searchBlog(..)) && args(request)")
-    fun publishKeywordEvent(request: BlogSearchRequest) {
+    fun publishKeywordEvent(request: BlogSearchRequestDto) {
         eventPublisher.publishEvent(BlogSearchByKeywordEvent(request.keyword, this))
-        logger().info("### published BlogSearchByKeywordEvent, keyword : $request.keyword")
+//        logger().info("### published BlogSearchByKeywordEvent, keyword : $request.keyword")
     }
 
 }

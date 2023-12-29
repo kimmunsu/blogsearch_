@@ -1,6 +1,6 @@
 package com.kms.blogsearch.domain.dto
 
-import com.kms.blogsearch.infrastructure.external.dto.KakaoBlogSearchResponse
+import com.kms.blogsearch.infrastructure.dto.KakaoBlogSearchResponse
 
 data class BlogPageDto (
     val totalCount: Int,

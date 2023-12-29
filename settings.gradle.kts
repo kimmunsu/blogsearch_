@@ -1,3 +1,6 @@
 rootProject.name = "blogsearch"
-include("search")
-include("keyword")
+include("core")
+include("api")
+include("batch")
+//include("infrastructure")
+//include("test")

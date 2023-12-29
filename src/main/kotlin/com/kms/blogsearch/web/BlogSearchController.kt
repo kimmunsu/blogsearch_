@@ -2,6 +2,7 @@ package com.kms.blogsearch.web
 
 import com.kms.blogsearch.application.BlogSearchFacade
 import com.kms.blogsearch.application.PopularKyewordUseCase
+import com.kms.blogsearch.infrastructure.dto.BlogSearchRequestDto
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
 import org.springframework.data.domain.Page
@@ -20,7 +21,7 @@ class BlogSearchController(
     @Operation(description = "search blog with pagination")
     @GetMapping
     fun searchBlog(@Valid @ModelAttribute request: BlogSearchRequest): Page<BlogResponse> {
-        return blogSearchFacade.searchBlog(request)
+        return blogSearchFacade.searchBlog(BlogSearchRequestDto.of(request))
     }
 
     @Operation(description = "find top 10 popular keyword")

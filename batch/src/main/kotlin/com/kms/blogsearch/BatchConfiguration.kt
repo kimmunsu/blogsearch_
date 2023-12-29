@@ -1,4 +1,4 @@
-package com.kms.blogsearch.batch
+package com.kms.blogsearch
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.annotation.EnableTransactionManagement

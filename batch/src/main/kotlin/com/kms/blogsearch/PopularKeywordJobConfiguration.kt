@@ -1,10 +1,10 @@
-package com.kms.blogsearch.batch
+package com.kms.blogsearch
 
 import com.kms.blogsearch.domain.BlogSearchKeyword
 import com.kms.blogsearch.domain.PopularKeyword
 import com.kms.blogsearch.infrastructure.BlogSearchKeywordSpringDataRepository
 import com.kms.blogsearch.infrastructure.PopularKeywordSpringDataRepository
-import com.kms.blogsearch.logger
+import com.kms.blogsearch.blogsearch.logger
 import org.springframework.batch.core.*
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.launch.support.RunIdIncrementer
