@@ -8,6 +8,53 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.21"
 }
 
+subprojects {
+	extra["springCloudVersion"] = "2023.0.0"
+
+	apply {
+		plugin("kotlin")
+		plugin("kotlin-spring")
+		plugin("kotlin-jpa")
+		plugin("org.springframework.boot")
+		plugin("io.spring.dependency-management")
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation("org.springframework.boot:spring-boot-starter-batch")
+		implementation("org.springframework.boot:spring-boot-starter-validation")
+		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+		implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+		runtimeOnly("com.h2database:h2")
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+		}
+	}
+}
+
+project(":api") {
+	dependencies {
+		implementation(project(":core"))
+	}
+}
+
+project(":batch") {
+	dependencies {
+		implementation(project(":core"))
+	}
+}
+
 group = "com.kms"
 version = "0.0.1-SNAPSHOT"
 
