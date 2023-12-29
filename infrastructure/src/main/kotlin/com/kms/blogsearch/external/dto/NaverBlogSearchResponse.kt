@@ -1,4 +1,4 @@
-package infrastructure.external.dto
+package com.kms.blogsearch.external.dto
 
 import com.kms.blogsearch.dto.BlogDto
 import com.kms.blogsearch.dto.BlogPageDto

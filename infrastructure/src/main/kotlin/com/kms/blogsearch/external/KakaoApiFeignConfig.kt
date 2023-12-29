@@ -1,4 +1,4 @@
-package infrastructure.external
+package com.kms.blogsearch.external
 
 import feign.Logger
 import feign.RequestInterceptor

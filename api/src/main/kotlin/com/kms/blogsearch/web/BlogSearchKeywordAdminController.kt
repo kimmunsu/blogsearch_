@@ -4,8 +4,10 @@ import com.kms.blogsearch.application.BlogSearchKeywordUseCase
 import com.kms.blogsearch.dto.BlogSearchKeywordDto
 import com.kms.blogsearch.dto.BlogSearchKeywordRequest
 import io.swagger.v3.oas.annotations.Operation
+import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -20,7 +22,7 @@ class BlogSearchKeywordAdminController(
 
     @Operation(description = "search blog with pagination")
     @GetMapping
-    fun findBlogSearchKeyword(blogSearchKeywordRequest: BlogSearchKeywordRequest): Page<BlogSearchKeywordDto> {
+    fun findBlogSearchKeyword(@Valid @ModelAttribute blogSearchKeywordRequest: BlogSearchKeywordRequest): Page<BlogSearchKeywordDto> {
         return blogSearchKeywordUseCase.findBlogSearchKeyword(blogSearchKeywordRequest)
     }
 }

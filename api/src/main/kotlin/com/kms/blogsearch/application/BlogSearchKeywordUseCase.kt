@@ -12,6 +12,7 @@ class BlogSearchKeywordUseCase(
     private val blogSearchKeywordService: BlogSearchKeywordService
 ) {
     fun findBlogSearchKeyword(blogSearchKeywordRequest: BlogSearchKeywordRequest): Page<BlogSearchKeywordDto> {
+        // pagination 에 대하여 FE 와 통일성을 위하여 page를 1부터 시작합니다.
         return PageRequest.of(
             blogSearchKeywordRequest.page - 1,
             blogSearchKeywordRequest.size - 1

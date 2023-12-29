@@ -1,10 +1,10 @@
-package infrastructure.external
+package com.kms.blogsearch.external
 
 import com.kms.blogsearch.domain.BlogSearchKeywordExternalRepository
 import com.kms.blogsearch.dto.BlogPageDto
 import com.kms.blogsearch.dto.BlogSearchRequestDto
-import infrastructure.external.dto.KakaoBlogSearchRequest
-import infrastructure.external.dto.NaverBlogSearchRequest
+import com.kms.blogsearch.external.dto.KakaoBlogSearchRequest
+import com.kms.blogsearch.external.dto.NaverBlogSearchRequest
 import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Repository
 

@@ -1,4 +1,4 @@
-package infrastructure
+package com.kms.blogsearch
 
 import com.kms.blogsearch.domain.PopularKeyword
 import org.springframework.data.jpa.repository.JpaRepository

@@ -2,8 +2,8 @@ package com.kms.blogsearch
 
 import com.kms.blogsearch.domain.BlogSearchKeyword
 import com.kms.blogsearch.domain.PopularKeyword
-import com.kms.blogsearch.infrastructure.BlogSearchKeywordSpringDataRepository
-import com.kms.blogsearch.infrastructure.PopularKeywordSpringDataRepository
+import com.kms.blogsearch.BlogSearchKeywordSpringDataRepository
+import com.kms.blogsearch.PopularKeywordSpringDataRepository
 import org.springframework.batch.core.BatchStatus
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.JobExecution

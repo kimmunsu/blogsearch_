@@ -1,8 +1,8 @@
-package infrastructure.external
+package com.kms.blogsearch.external
 
-import infrastructure.external.dto.KakaoBlogSearchRequest
-import infrastructure.external.dto.KakaoBlogSearchResponse
-import infrastructure.external.exception.KakaoApiExceptionDecoder
+import com.kms.blogsearch.external.dto.KakaoBlogSearchRequest
+import com.kms.blogsearch.external.dto.KakaoBlogSearchResponse
+import com.kms.blogsearch.external.exception.KakaoApiExceptionDecoder
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.cloud.openfeign.SpringQueryMap
 import org.springframework.web.bind.annotation.GetMapping

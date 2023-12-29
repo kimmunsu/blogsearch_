@@ -1,8 +1,8 @@
-package infrastructure.external
+package com.kms.blogsearch.external
 
-import infrastructure.external.dto.NaverBlogSearchRequest
-import infrastructure.external.dto.NaverBlogSearchResponse
-import infrastructure.external.exception.NaverApiExceptionDecoder
+import com.kms.blogsearch.external.dto.NaverBlogSearchRequest
+import com.kms.blogsearch.external.dto.NaverBlogSearchResponse
+import com.kms.blogsearch.external.exception.NaverApiExceptionDecoder
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.cloud.openfeign.SpringQueryMap
 import org.springframework.web.bind.annotation.GetMapping

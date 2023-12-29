@@ -1,5 +1,6 @@
 package com.kms.blogsearch.aop
 
+import com.kms.blogsearch.dto.BlogSearchRequestDto
 import com.kms.blogsearch.event.BlogSearchByKeywordEvent
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Component
 @Aspect
 @Component
 class BlogSearchByKeywordAspect(val eventPublisher: ApplicationEventPublisher) {
-    @Before("execution(* com.kms.blogsearch.domain.BlogSearchKeywordService.save(..)) && args(keyword)")
-    fun publishKeywordEvent(keyword: String) {
-        eventPublisher.publishEvent(BlogSearchByKeywordEvent(keyword))
+    @Before("execution(* com.kms.blogsearch.domain.BlogSearchKeywordExternalRepository.searchBlog(..)) && args(request)")
+    fun publishKeywordEvent(request: BlogSearchRequestDto) {
+        eventPublisher.publishEvent(BlogSearchByKeywordEvent(request.keyword))
     }
 }
