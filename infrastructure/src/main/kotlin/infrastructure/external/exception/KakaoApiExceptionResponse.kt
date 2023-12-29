@@ -1,4 +1,4 @@
-package com.kms.blogsearch.exception
+package infrastructure.external.exception
 
 data class KakaoApiExceptionResponse(
     val errorType: String,

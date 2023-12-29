@@ -8,6 +8,28 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.21"
 }
 
+group = "com.kms"
+version = "0.0.1-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = "17"
+    }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 subprojects {
 	extra["springCloudVersion"] = "2023.0.0"
 
@@ -41,6 +63,12 @@ subprojects {
 			mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
 		}
 	}
+}
+
+project(":infrastructure") {
+    dependencies {
+        implementation(project(":core"))
+    }
 }
 
 project(":api") {

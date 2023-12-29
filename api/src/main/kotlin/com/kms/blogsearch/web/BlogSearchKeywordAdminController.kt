@@ -23,5 +23,4 @@ class BlogSearchKeywordAdminController(
     fun findBlogSearchKeyword(blogSearchKeywordRequest: BlogSearchKeywordRequest): Page<BlogSearchKeywordDto> {
         return blogSearchKeywordUseCase.findBlogSearchKeyword(blogSearchKeywordRequest)
     }
-
 }

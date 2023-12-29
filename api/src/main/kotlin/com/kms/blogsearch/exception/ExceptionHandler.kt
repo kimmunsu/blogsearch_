@@ -21,18 +21,15 @@ class ExceptionHandler {
             )
     }
 
-    //@Valid exception handle
+    // @Valid exception handle
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleValidationExceptions(e: MethodArgumentNotValidException): ResponseEntity<Map<String, BaseErrorResponse>> {
         val result = mutableMapOf<String, BaseErrorResponse>()
         e.bindingResult.allErrors.forEach {
-            result.put(
-                (it as FieldError).field,
-                BaseErrorResponse(
-                    ErrorCode.BAD_PARAMETER.status.value(),
-                    ErrorCode.BAD_PARAMETER.name,
-                    it.defaultMessage ?: ErrorCode.BAD_PARAMETER.message
-                )
+            result[(it as FieldError).field] = BaseErrorResponse(
+                ErrorCode.BAD_PARAMETER.status.value(),
+                ErrorCode.BAD_PARAMETER.name,
+                it.defaultMessage ?: ErrorCode.BAD_PARAMETER.message
             )
         }
 
@@ -40,7 +37,6 @@ class ExceptionHandler {
             .body(
                 result
             )
-
     }
 
     // external api exception handle
@@ -55,19 +51,19 @@ class ExceptionHandler {
         } ?: errorCode.message
 
         return ResponseEntity.status(errorCode.status)
-                .body(
-                    BaseErrorResponse(
-                        errorCode.status.value(),
-                        errorCode.name,
-                        message
-                    )
+            .body(
+                BaseErrorResponse(
+                    errorCode.status.value(),
+                    errorCode.name,
+                    message
                 )
+            )
     }
 
-    //common
+    // common
     @ExceptionHandler(Exception::class)
     fun exceptionHandle(e: Exception): ResponseEntity<BaseErrorResponse> {
-//TODO        logger().error(e.message)
+// TODO        logger().error(e.message)
         return ResponseEntity.status(ErrorCode.INTERNAL_SERVER_ERROR.status)
             .body(
                 BaseErrorResponse(

@@ -8,11 +8,8 @@ class PopularKeywordService(
     val popularKeywordRepository: PopularKeywordRepository
 ) {
     fun findTop10PopularKeyword(): List<PopularKeywordDto> {
-        val keywordList : List<PopularKeyword> = popularKeywordRepository.findTop10PopularKeyword()
-        return keywordList.map {
-            PopularKeywordDto.of(
-                it
-            )
-        }
+        return popularKeywordRepository
+            .findTop10PopularKeyword()
+            .map(::PopularKeywordDto)
     }
 }

@@ -1,4 +1,4 @@
-package com.kms.blogsearch.infrastructure.external
+package infrastructure.external
 
 import feign.Logger
 import feign.RequestInterceptor
@@ -22,5 +22,4 @@ class KakaoApiFeignConfig {
     fun feignLoggerLevel(): Logger.Level {
         return Logger.Level.FULL
     }
-
 }

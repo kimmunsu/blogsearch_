@@ -4,7 +4,11 @@ import com.kms.blogsearch.domain.BlogSearchKeyword
 import com.kms.blogsearch.domain.PopularKeyword
 import com.kms.blogsearch.infrastructure.BlogSearchKeywordSpringDataRepository
 import com.kms.blogsearch.infrastructure.PopularKeywordSpringDataRepository
-import org.springframework.batch.core.*
+import org.springframework.batch.core.BatchStatus
+import org.springframework.batch.core.Job
+import org.springframework.batch.core.JobExecution
+import org.springframework.batch.core.JobExecutionListener
+import org.springframework.batch.core.Step
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.batch.core.repository.JobRepository
@@ -23,7 +27,7 @@ import java.time.LocalDateTime
 class PopularKeywordJobConfiguration(
     val blogSearchKeywordRepository: BlogSearchKeywordSpringDataRepository,
     val popularKeywordRepository: PopularKeywordSpringDataRepository
-): JobExecutionListener {
+) : JobExecutionListener {
 
     companion object {
         const val JOB_NAME = "popularKeywordJob"

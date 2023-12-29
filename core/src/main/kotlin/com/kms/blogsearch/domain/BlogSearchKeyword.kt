@@ -16,5 +16,5 @@ class BlogSearchKeyword {
     var id: Long = 0L
     var keyword: String = ""
     var createdDtm: LocalDateTime = LocalDateTime.MIN
-    var processedDtm : LocalDateTime? = null
+    var processedDtm: LocalDateTime? = null
 }

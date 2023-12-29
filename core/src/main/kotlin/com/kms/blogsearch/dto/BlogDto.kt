@@ -1,5 +1,6 @@
 package com.kms.blogsearch.dto
 
+
 import com.kms.blogsearch.domain.dto.Document
 
 data class BlogDto(
@@ -9,17 +10,4 @@ data class BlogDto(
     val url: String,
     val datetime: String,
     val thumbnail: String
-) {
-    companion object {
-        fun of(document: Document): BlogDto {
-            return BlogDto(
-                document.blogname,
-                document.title,
-                document.contents,
-                document.url,
-                document.datetime,
-                document.thumbnail
-            )
-        }
-    }
-}
+)

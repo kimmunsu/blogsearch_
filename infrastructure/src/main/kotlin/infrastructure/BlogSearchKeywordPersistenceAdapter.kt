@@ -1,4 +1,4 @@
-package com.kms.blogsearch.infrastructure
+package infrastructure
 
 import com.kms.blogsearch.domain.BlogSearchKeyword
 import com.kms.blogsearch.domain.BlogSearchKeywordRepository
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class BlogSearchKeywordPersistenceAdapter(
-    val blogSearchKeywordSpringDataRepository: BlogSearchKeywordSpringDataRepository
-): BlogSearchKeywordRepository {
+    private val blogSearchKeywordSpringDataRepository: BlogSearchKeywordSpringDataRepository
+) : BlogSearchKeywordRepository {
 
     override fun save(blogSearchKeyword: BlogSearchKeyword) {
         blogSearchKeywordSpringDataRepository.save(blogSearchKeyword)

@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class BlogSearchKeywordUseCase(
-    val blogSearchKeywordService: BlogSearchKeywordService
+    private val blogSearchKeywordService: BlogSearchKeywordService
 ) {
-
     fun findBlogSearchKeyword(blogSearchKeywordRequest: BlogSearchKeywordRequest): Page<BlogSearchKeywordDto> {
-        return PageRequest.of(blogSearchKeywordRequest.page - 1, blogSearchKeywordRequest.size - 1).let {
+        return PageRequest.of(
+            blogSearchKeywordRequest.page - 1,
+            blogSearchKeywordRequest.size - 1
+        ).let {
             blogSearchKeywordService.findAllWithPaging(it)
         }
-
     }
-
 }
