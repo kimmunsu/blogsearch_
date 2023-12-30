@@ -17,4 +17,4 @@ spring:
 
 logging:
   level:
-    root: DEBUG
+    ROOT: INFO

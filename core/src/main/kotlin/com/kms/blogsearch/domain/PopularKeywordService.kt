@@ -15,7 +15,6 @@ class PopularKeywordService(
     /**
      * 인기 검색어 상위 10개 조회
      */
-    //TODO cache (eviction 은 batch 에서... 따라서 redis 같은 remote cache 필요)
     @Transactional(readOnly = true)
     fun findTop10PopularKeyword(): List<PopularKeywordDto> {
         return popularKeywordRepository

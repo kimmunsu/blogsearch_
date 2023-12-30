@@ -3,11 +3,9 @@ package com.kms.blogsearch
 import com.kms.blogsearch.domain.BlogSearchKeyword
 import com.kms.blogsearch.domain.PopularKeyword
 import jakarta.persistence.EntityManagerFactory
-import org.springframework.batch.core.BatchStatus
 import org.springframework.batch.core.Job
-import org.springframework.batch.core.JobExecution
-import org.springframework.batch.core.JobExecutionListener
 import org.springframework.batch.core.Step
+import org.springframework.batch.core.configuration.annotation.JobScope
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.repository.JobRepository
 import org.springframework.batch.core.step.builder.StepBuilder
@@ -16,6 +14,7 @@ import org.springframework.batch.item.database.JpaItemWriter
 import org.springframework.batch.item.database.JpaPagingItemReader
 import org.springframework.batch.item.database.builder.JpaItemWriterBuilder
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.PlatformTransactionManager
@@ -36,12 +35,9 @@ import java.time.LocalDateTime
 @Configuration
 class PopularKeywordJobConfiguration(
     val blogSearchKeywordRepository: BlogSearchKeywordPersistenceAdapter,
-    val popularKeywordRepository: PopularKeywordPersistenceAdapter,
+    val keywordCountManager: KeywordCountManager,
     val entityManagerFactory: EntityManagerFactory
-) : JobExecutionListener {
-
-    // list reader, list processor, list writer 에 대한 구현중 진행이 안되어 인메모리 사용.
-    lateinit var keywordCountMap: MutableMap<String, PopularKeyword>
+) {
 
     companion object {
         const val JOB_NAME = "popularKeywordJob"
@@ -54,27 +50,27 @@ class PopularKeywordJobConfiguration(
     fun popularKeywordJob(jobRepository: JobRepository, platformTransactionManager: PlatformTransactionManager): Job {
         val batchExecuteDtm = LocalDateTime.now()
         return JobBuilder(JOB_NAME, jobRepository)
-            .start(popularKeywordStep(batchExecuteDtm, jobRepository, platformTransactionManager))
+            .start(popularKeywordStep(batchExecuteDtm.toString(), jobRepository, platformTransactionManager))
             .build()
     }
 
     @Bean
+    @JobScope
     fun popularKeywordStep(
-        batchExecuteDtm: LocalDateTime,
+        @Value("#{jobParameters[EXECUTE_DTM]}") batchExecuteDtm: String,
         jobRepository: JobRepository,
         platformTransactionManager: PlatformTransactionManager
     ): Step {
         return StepBuilder(STEP_NAME, jobRepository)
             .chunk<BlogSearchKeyword, PopularKeyword>(CHUNK_SIZE, platformTransactionManager)
             .reader(keywordReader())
-            .processor(keywordProcessor(batchExecuteDtm))
+            .processor(keywordProcessor())
             .writer(keywordWriter())
             .build()
     }
 
     @Bean
     fun keywordReader(): JpaPagingItemReader<BlogSearchKeyword> {
-        keywordCountMap = mutableMapOf()
         return JpaPagingItemReaderBuilder<BlogSearchKeyword>()
             .name(READER_NAME)
             .entityManagerFactory(entityManagerFactory)
@@ -83,54 +79,22 @@ class PopularKeywordJobConfiguration(
             .build()
     }
 
-    fun keywordCount(keyword: String) : PopularKeyword{
-        var popularKeyword = keywordCountMap[keyword]
-
-        if (popularKeyword != null) {
-            keywordCountMap[keyword]!!.count++
-        } else {
-            // find by keyword
-            popularKeyword = popularKeywordRepository.findByKeyword(keyword)
-            if (popularKeyword == null) {
-                popularKeyword = PopularKeyword().apply {
-                    this.keyword = keyword
-                    this.count = 0
-                    this.createdDtm = LocalDateTime.now()
-                }
-            }
-            // update
-            popularKeyword.apply {
-                this.count++
-                this.modifiedDtm = LocalDateTime.now()
-            }
-            keywordCountMap[keyword] = popularKeyword
-        }
-
-        return popularKeyword
-    }
-
     @Bean
-    fun keywordProcessor(processedDtm: LocalDateTime): ItemProcessor<BlogSearchKeyword, PopularKeyword> {
+    fun keywordProcessor(): ItemProcessor<BlogSearchKeyword, PopularKeyword> {
+
         return ItemProcessor { blogSearchKeyword ->
             // processed dtm update
-            blogSearchKeyword.processedDtm = processedDtm
-            keywordCount(blogSearchKeyword.keyword)
+            blogSearchKeyword.processedDtm = LocalDateTime.now()
+            blogSearchKeywordRepository.save(blogSearchKeyword)
+            val popularKeywrod = keywordCountManager.keywordCount(blogSearchKeyword.keyword)
+            popularKeywrod
         }
     }
 
     @Bean
     fun keywordWriter(): JpaItemWriter<PopularKeyword> {
-        this.keywordCountMap.clear()
-        return JpaItemWriterBuilder<PopularKeyword>()
-            .entityManagerFactory(entityManagerFactory)
-            .build()
-    }
-
-    override fun afterJob(jobExecution: JobExecution) {
-        if (jobExecution.status == BatchStatus.COMPLETED) {
-            logger().info("#### FINISHED $JOB_NAME, start delete BlogSearchKeyword")
-            blogSearchKeywordRepository.deleteAllByProcessedDtmIsNotNull()
-            logger().info("#### FINISHED $JOB_NAME, end delete BlogSearchKeyword")
-        }
+        val builder = JpaItemWriterBuilder<PopularKeyword>().entityManagerFactory(entityManagerFactory).build()
+        builder.afterPropertiesSet()
+        return builder
     }
 }

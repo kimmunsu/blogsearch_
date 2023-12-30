@@ -72,7 +72,6 @@ class ExceptionHandler {
      */
     @ExceptionHandler(Exception::class)
     fun exceptionHandle(e: Exception): ResponseEntity<BaseErrorResponse> {
-// TODO        logger().error(e.message)
         return ResponseEntity.status(ErrorCode.INTERNAL_SERVER_ERROR.status)
             .body(
                 BaseErrorResponse(
