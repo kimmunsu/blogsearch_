@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository
 class PopularKeywordPersistenceAdapter(
     private val popularKeywordSpringDataRepository: PopularKeywordSpringDataRepository
 ) : PopularKeywordRepository {
+
     override fun findTop10ByOrderByCountDesc(): List<PopularKeyword> {
         return popularKeywordSpringDataRepository.findTop10ByOrderByCountDesc()
     }

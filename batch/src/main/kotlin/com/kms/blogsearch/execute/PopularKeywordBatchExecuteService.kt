@@ -12,7 +12,7 @@ class PopularKeywordBatchExecuteService(
     private val jobLauncher: JobLauncher,
     private val popularKeywordJob: Job) {
 
-    @Scheduled(cron = "*/20 * * * * *")
+    @Scheduled(cron = "0 * * * * *")
     fun execute() {
         jobLauncher.run(popularKeywordJob, JobParameters())
         logger().info("### EXECUTED JOB")

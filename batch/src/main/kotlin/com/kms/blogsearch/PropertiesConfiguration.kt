@@ -1,4 +1,4 @@
-package com.kms.blogsearch.config
+package com.kms.blogsearch
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
@@ -9,6 +9,6 @@ import org.springframework.context.annotation.PropertySource
 @Configuration
 @PropertySource(
     ignoreResourceNotFound = true,
-    value = ["classpath:batch-application.yml"],
-    factory = PropertySourceFactory::class)
+    value = ["classpath:application-batch.yml"],
+    factory = BatchPropertySourceFactory::class)
 class PropertiesConfiguration

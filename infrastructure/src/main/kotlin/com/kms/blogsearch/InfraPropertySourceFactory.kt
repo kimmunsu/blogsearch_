@@ -1,4 +1,4 @@
-package com.kms.blogsearch.config
+package com.kms.blogsearch
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean
 import org.springframework.core.env.PropertiesPropertySource
@@ -8,9 +8,9 @@ import org.springframework.core.io.support.PropertySourceFactory
 import java.util.Properties
 
 /**
- * batch module application properties load factory
+ * infra module application properties load factory
  */
-class PropertySourceFactory: PropertySourceFactory {
+class InfraPropertySourceFactory: PropertySourceFactory {
     override fun createPropertySource(name: String?, resource: EncodedResource): PropertySource<*> {
         val properties = loadYml(resource)
         val sourceName = name ?: resource.resource.filename
