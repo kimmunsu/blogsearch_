@@ -14,8 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 class PopularKeywordJobConfigurationTest {
 
-    private val blogSearchKeywordRepository: BlogSearchKeywordSpringDataRepository = mockk()
-    private val popularKeywordRepository: PopularKeywordSpringDataRepository = mockk()
+    private val blogSearchKeywordRepository: BlogSearchKeywordPersistenceAdapter = mockk()
+    private val popularKeywordRepository: PopularKeywordPersistenceAdapter = mockk()
     private val entityManagerFactory: EntityManagerFactory = mockk()
 
     private lateinit var popularKeywordJobConfiguration: PopularKeywordJobConfiguration
