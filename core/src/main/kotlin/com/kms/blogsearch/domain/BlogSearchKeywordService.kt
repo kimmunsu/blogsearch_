@@ -13,7 +13,7 @@ import java.time.LocalDateTime
  */
 @Service
 class BlogSearchKeywordService(
-    val blogSearchKeywordRepository: BlogSearchKeywordRepository
+    private val blogSearchKeywordRepository: BlogSearchKeywordRepository
 ) {
 
     /**
@@ -34,13 +34,11 @@ class BlogSearchKeywordService(
      */
     @Transactional(readOnly = true)
     fun findAllWithPaging(request: PageRequest): Page<BlogSearchKeywordDto> {
-        val result: Page<BlogSearchKeyword> = blogSearchKeywordRepository.findAllWithPaging(request)
-        return result.let { keyword ->
-            PageImpl(
-                keyword.content.map { BlogSearchKeywordDto.of(it) },
-                keyword.pageable,
-                keyword.totalElements
-            )
-        }
+        val keyword = blogSearchKeywordRepository.findAllWithPaging(request)
+        return PageImpl(
+            keyword.content.map(::BlogSearchKeywordDto),
+            keyword.pageable,
+            keyword.totalElements
+        )
     }
 }

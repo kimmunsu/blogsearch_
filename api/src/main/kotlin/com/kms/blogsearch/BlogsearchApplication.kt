@@ -9,5 +9,3 @@ class BlogsearchApplication
 fun main(args: Array<String>) {
     runApplication<BlogsearchApplication>(*args)
 }
-
-inline fun <reified T> T.logger() = LoggerFactory.getLogger(T::class.java)!!

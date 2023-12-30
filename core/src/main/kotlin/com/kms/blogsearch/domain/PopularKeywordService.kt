@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Service
 class PopularKeywordService(
-    val popularKeywordRepository: PopularKeywordRepository
+    private val popularKeywordRepository: PopularKeywordRepository
 ) {
 
     /**

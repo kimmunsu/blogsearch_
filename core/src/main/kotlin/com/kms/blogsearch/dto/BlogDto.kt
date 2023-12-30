@@ -1,8 +1,8 @@
 package com.kms.blogsearch.dto
 
-
-import com.kms.blogsearch.domain.dto.Document
-
+/**
+ * 블로그 검색 결과
+ */
 data class BlogDto(
     val blogname: String,
     val title: String,

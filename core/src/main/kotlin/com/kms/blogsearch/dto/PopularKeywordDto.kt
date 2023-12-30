@@ -11,12 +11,5 @@ data class PopularKeywordDto(
     val keyword: String,
     val count: Int
 ) {
-    companion object {
-        fun of(popularKeyword: PopularKeyword): PopularKeywordDto {
-            return PopularKeywordDto(
-                popularKeyword.keyword,
-                popularKeyword.count
-            )
-        }
-    }
+    constructor(popularKeyword: PopularKeyword) : this(popularKeyword.keyword, popularKeyword.count)
 }

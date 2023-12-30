@@ -20,6 +20,9 @@ class BlogSearchController(
     private val popularKeywordUseCase: PopularKeywordUseCase
 ) {
 
+    /**
+     * 블로그 검색 (페이징)
+     */
     @Operation(description = "search blog with pagination")
     @GetMapping
     fun searchBlog(@Valid @ModelAttribute request: BlogSearchRequest): Page<BlogResponse> {
@@ -34,5 +37,4 @@ class BlogSearchController(
     fun findTop10PopularKeyword(): List<PopularKeywordResponse> {
         return popularKeywordUseCase.findTop10PopularKeyword()
     }
-
 }
