@@ -1,0 +1,8 @@
+api:
+  kakao:
+    api-url: https://dapi.kakao.com
+    application-key: KakaoAK 6a23baf8faae74bf04f118e9c20613c4
+  naver:
+    api-url: https://openapi.naver.com
+    naver-client-id: QI50PVoMcn9VIvta0Ymk
+    naver-client-secret: fqKSTKPO9q

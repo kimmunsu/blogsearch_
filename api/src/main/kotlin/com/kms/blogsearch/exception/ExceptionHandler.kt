@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class ExceptionHandler {
 
+    /**
+     * application 공통 exception handle
+     */
     @ExceptionHandler(BaseException::class)
     fun baseExceptionHandle(e: BaseException): ResponseEntity<BaseErrorResponse> {
         return ResponseEntity.status(e.errorCode.status)
@@ -21,7 +24,9 @@ class ExceptionHandler {
             )
     }
 
-    // @Valid exception handle
+    /**
+     * @Valid exception handle
+     */
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleValidationExceptions(e: MethodArgumentNotValidException): ResponseEntity<Map<String, BaseErrorResponse>> {
         val result = mutableMapOf<String, BaseErrorResponse>()
@@ -39,7 +44,9 @@ class ExceptionHandler {
             )
     }
 
-    // external api exception handle
+    /**
+     * external api exception handle
+     */
     @ExceptionHandler(ExternalOpenFeignApiException::class)
     fun externalOpenFeignApiException(e: ExternalOpenFeignApiException): ResponseEntity<BaseErrorResponse> {
         val errorCode = ErrorCode.EXTERNAL_API_ERROR
@@ -60,7 +67,9 @@ class ExceptionHandler {
             )
     }
 
-    // common
+    /**
+     * 미정의 예외, server error 처리
+     */
     @ExceptionHandler(Exception::class)
     fun exceptionHandle(e: Exception): ResponseEntity<BaseErrorResponse> {
 // TODO        logger().error(e.message)

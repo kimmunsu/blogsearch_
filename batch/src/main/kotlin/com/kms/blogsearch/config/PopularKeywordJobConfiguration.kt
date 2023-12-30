@@ -1,9 +1,11 @@
-package com.kms.blogsearch
+package com.kms.blogsearch.config
 
-import com.kms.blogsearch.domain.BlogSearchKeyword
-import com.kms.blogsearch.domain.PopularKeyword
 import com.kms.blogsearch.BlogSearchKeywordSpringDataRepository
 import com.kms.blogsearch.PopularKeywordSpringDataRepository
+import com.kms.blogsearch.domain.BlogSearchKeyword
+import com.kms.blogsearch.domain.PopularKeyword
+import com.kms.blogsearch.logger
+import jakarta.persistence.EntityManagerFactory
 import org.springframework.batch.core.BatchStatus
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.JobExecution
@@ -26,7 +28,8 @@ import java.time.LocalDateTime
 @Configuration
 class PopularKeywordJobConfiguration(
     val blogSearchKeywordRepository: BlogSearchKeywordSpringDataRepository,
-    val popularKeywordRepository: PopularKeywordSpringDataRepository
+    val popularKeywordRepository: PopularKeywordSpringDataRepository,
+    val entityManagerFactory: EntityManagerFactory
 ) : JobExecutionListener {
 
     companion object {
@@ -64,6 +67,7 @@ class PopularKeywordJobConfiguration(
         blogSearchKeywordRepository.findByProcessedDtmIsNull()
         return JpaPagingItemReaderBuilder<BlogSearchKeyword>()
             .name(READER_NAME)
+            .entityManagerFactory(entityManagerFactory)
             .pageSize(CHUNK_SIZE)
             .queryString("SELECT k FROM blocksearchkeyword k WHERE processedDtm IS NULL")
             .build()
@@ -97,6 +101,7 @@ class PopularKeywordJobConfiguration(
     @Bean
     fun keywordWriter(): JpaItemWriter<PopularKeyword> {
         return JpaItemWriterBuilder<PopularKeyword>()
+            .entityManagerFactory(entityManagerFactory)
             .build()
     }
 

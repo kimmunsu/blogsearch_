@@ -5,7 +5,6 @@ import com.kms.blogsearch.dto.BlogPageDto
 import com.kms.blogsearch.dto.BlogSearchRequestDto
 import com.kms.blogsearch.external.dto.KakaoBlogSearchRequest
 import com.kms.blogsearch.external.dto.NaverBlogSearchRequest
-import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -14,11 +13,11 @@ class BlogSearchExternalAdapter(
     private val naverApiOpenFeign: NaverApiOpenFeign
 ): BlogSearchKeywordExternalRepository {
 
-    @PostConstruct
-    fun init() {
-        println("############################################## ")
-    }
-
+    /**
+     * 블로그 검색
+     * 우선 kakao api 검색
+     * 예외발생시 naver api 검색
+     */
     override fun searchBlog(request: BlogSearchRequestDto): BlogPageDto {
         return try {
                 kakaoApiOpenFeign.search(KakaoBlogSearchRequest(request)).toDto()

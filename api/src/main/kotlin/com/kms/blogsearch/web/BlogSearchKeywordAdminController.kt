@@ -20,7 +20,7 @@ class BlogSearchKeywordAdminController(
     val blogSearchKeywordUseCase: BlogSearchKeywordUseCase
 ) {
 
-    @Operation(description = "search blog with pagination")
+    @Operation(description = "find blog search keyword with pagination")
     @GetMapping
     fun findBlogSearchKeyword(@Valid @ModelAttribute blogSearchKeywordRequest: BlogSearchKeywordRequest): Page<BlogSearchKeywordDto> {
         return blogSearchKeywordUseCase.findBlogSearchKeyword(blogSearchKeywordRequest)

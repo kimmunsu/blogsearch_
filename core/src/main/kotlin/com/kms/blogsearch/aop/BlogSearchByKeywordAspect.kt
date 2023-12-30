@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component
 @Aspect
 @Component
 class BlogSearchByKeywordAspect(val eventPublisher: ApplicationEventPublisher) {
+
+    /**
+     * 블로그 검색시 사용된 request 의 keyword 를 담은 event 발행
+     */
     @Before("execution(* com.kms.blogsearch.domain.BlogSearchKeywordExternalRepository.searchBlog(..)) && args(request)")
     fun publishKeywordEvent(request: BlogSearchRequestDto) {
         eventPublisher.publishEvent(BlogSearchByKeywordEvent(request.keyword))

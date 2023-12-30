@@ -14,10 +14,7 @@ spring:
       enabled: false
     jdbc:
       initialize-schema: embedded
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  sql:
-    init:
-      mode: always
+#TODO  h2:
+      #    console:
+      #enabled: true
+      #path: /h2-console

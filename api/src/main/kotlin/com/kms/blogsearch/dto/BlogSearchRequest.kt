@@ -3,6 +3,9 @@ package com.kms.blogsearch.dto
 import jakarta.validation.constraints.NotNull
 import org.hibernate.validator.constraints.Range
 
+/**
+ * 블로그 검색 request
+ */
 data class BlogSearchRequest(
     @field:NotNull(message = "키워드는 반드시 입력값이 있어야 합니다.")
     val keyword: String,

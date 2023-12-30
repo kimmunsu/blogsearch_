@@ -14,13 +14,4 @@ data class BlogSearchKeywordDto(
         keyword.createdDtm
     )
 
-    companion object {
-        fun of(keyword: BlogSearchKeyword): BlogSearchKeywordDto {
-            return BlogSearchKeywordDto(
-                keyword.id,
-                keyword.keyword,
-                keyword.createdDtm
-            )
-        }
-    }
 }

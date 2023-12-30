@@ -7,13 +7,11 @@ data class BlogSearchKeywordResponse(
     val keyword: String,
     val createdDtm: LocalDateTime
 ) {
-    companion object {
-        fun of(dto: BlogSearchKeywordDto): BlogSearchKeywordResponse {
-            return BlogSearchKeywordResponse(
-                dto.id,
-                dto.keyword,
-                dto.createdDtm
-            )
-        }
-    }
+
+    constructor(dto: BlogSearchKeywordDto): this(
+        dto.id,
+        dto.keyword,
+        dto.createdDtm
+    )
+
 }
