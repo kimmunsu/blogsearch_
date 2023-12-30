@@ -62,6 +62,7 @@ https://github.com/kimmunsu/blogsearch_/blob/multimodule/api.jar
   - org.springframework.boot:spring-boot-starter-batch => spring batch
 
 ### 개선이 필요한 점
-- batch 가 완성되지 않아 기능 구현의 아쉬움
+- batch 의 listener 를 통해서 count 가 끝난 검색데이터 삭제 작업처리의 아쉬움
+- batch 에서 검색 키워드 count 를 in memory 를 사용하는데, 데이터양에 따라 위험할 수 있음
 - 로직상 분기가 있을 부분만 커버하는 테스트 코드
 - 외부 api 사용에 대한 circuit breaker 미구현
