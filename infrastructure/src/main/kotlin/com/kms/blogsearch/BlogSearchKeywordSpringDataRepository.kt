@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface BlogSearchKeywordSpringDataRepository : JpaRepository<BlogSearchKeyword, Long> {
-    fun findByProcessedDtmIsNull(): List<BlogSearchKeyword>
     fun deleteAllByProcessedDtmIsNotNull()
 }

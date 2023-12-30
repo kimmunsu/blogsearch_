@@ -67,6 +67,9 @@ subprojects {
 
 project(":infrastructure") {
     dependencies {
+        implementation("it.ozimov:embedded-redis:0.7.3")
+        implementation("org.springframework.boot:spring-boot-starter-data-redis")
+        implementation("org.springframework.boot:spring-boot-starter-cache")
         implementation(project(":core"))
     }
 }

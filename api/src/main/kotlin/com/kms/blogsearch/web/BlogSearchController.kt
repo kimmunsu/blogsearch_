@@ -26,6 +26,9 @@ class BlogSearchController(
         return blogSearchFacade.searchBlog(request)
     }
 
+    /**
+     * 인기 검색어 조회
+     */
     @Operation(description = "find top 10 popular keyword")
     @GetMapping("/popular-keyword")
     fun findTop10PopularKeyword(): List<PopularKeywordResponse> {
