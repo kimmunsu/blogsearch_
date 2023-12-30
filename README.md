@@ -1,5 +1,8 @@
 # 블로그 검색 프로젝트
 
+### download jar
+https://github.com/kimmunsu/blogsearch_/blob/multimodule/api.jar
+
 ### 프로젝트 주요 아키텍처
 - 헥사고날 아키텍처를 모방하여 in / out going 구성
   - 도메인은 도메인의 비즈니스 로직에만 집중
