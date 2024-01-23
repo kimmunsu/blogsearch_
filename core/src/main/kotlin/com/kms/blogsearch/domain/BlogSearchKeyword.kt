@@ -17,7 +17,7 @@ class BlogSearchKeyword {
     var id: Long = 0L
     @Column(name = "keyword")
     var keyword: String = ""
-    @Column(name = "created_dtm")
+    @Column(name = "created_dtm", nullable = false)
     var createdDtm: LocalDateTime = LocalDateTime.MIN
     @Column(name = "processed_dtm")
     var processedDtm: LocalDateTime? = null

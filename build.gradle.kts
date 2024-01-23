@@ -36,8 +36,8 @@ subprojects {
 
     configurations{
         all {
-            exclude(group="commons-logging", module = "commons-logging")
-            exclude(group="ch.qos.logback", module = "logback-classic")
+            exclude(group="org.slf4j", module = "slf4j-simple")
+            exclude(group="org.springframework.boot", module="spring-boot-starter-logging")
         }
     }
 
@@ -62,6 +62,10 @@ subprojects {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
         implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+        implementation("org.slf4j:slf4j-simple:2.0.9")
+
+        //declare logging
+        implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
         testImplementation("io.mockk:mockk:1.13.8")
         testImplementation("org.springframework.boot:spring-boot-starter-test")

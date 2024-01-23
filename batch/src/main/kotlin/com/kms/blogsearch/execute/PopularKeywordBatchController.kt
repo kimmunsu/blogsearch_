@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/batch")
-class PopularKeywordBatchController(private val popularKeywordBatchExecuteService: PopularKeywordBatchExecuteService) {
+class PopularKeywordBatchController(private val popularKeywordBatchExecuteScheduler: PopularKeywordBatchExecuteScheduler) {
 
     /**
      * api execute
      */
     @PostMapping
     fun execute() {
-        popularKeywordBatchExecuteService.execute()
+        popularKeywordBatchExecuteScheduler.execute()
     }
 
 }
